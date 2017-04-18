@@ -47,7 +47,7 @@
                 var arrayLength = obj.length;
                 for (var i = 0; i < arrayLength; i++) {
                     if(i==0){var x='active'} else {var x=''};
-                    $("div.maps ul").prepend("<li class='item "+x+"'><img src='"+obj[i].fields.file[0].preview.url+"'><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                    $("div.maps ul").prepend("<li class='item "+x+"'><div class='img-container'><img src='"+obj[i].fields.file[0].preview.url+"'></div><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
                 }     
             });
           
@@ -69,14 +69,16 @@
             #resources .row div ul li {margin: 0 0 10px 0;}
             #resources .row div ul li strong {font-size: 14pt; font-weight: bold}
             #resources .row div ul li span {font-size: 14pt; color:#808080}
-            #resources .row div .more-link {color:#E74E37}
-            #resources .row div img {width:123px; display:block; margin: 0 auto 20px}
+            #resources .row div .more-link {color:#E74E37; position:relative; top:3px; font-size:14px}
+            #resources .row div img {height: 90%; display:block; margin: 0 auto 20px}
             #resources .row div iframe {margin: 15px 0 20px}
+            .carousel-inner {height: 300px}
             .carousel-controls {text-align: center; width:81px; margin: 0 auto;}
-            .carousel-control-prev, .carousel-control-next {height:22px; width:16px; background-color: #E74E37; border-radius: 3px; display:block }
+            .carousel-control-prev, .carousel-control-next {height:22px; width:16px; background-color: #E74E37; border-radius: 4px; display:block }
             .carousel-control-prev {float:left}
             .carousel-control-next {float:right}
             .carousel-control-prev span, .carousel-control-next span {color: #ffffff; top:3px;}
+            .img-container {height:200px}
         </style>   
     </head>
 
@@ -88,12 +90,12 @@
                 <div class="col-xs-6 col-md-4 humrep">
                     <h3>HUMANITARIAN REPORTS</h3>
                     <ul></ul>
-                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4593&disaster_type=4672#content" target="_blank">More >>></a>
+                    <a class="more-link" href="http://reliefweb.int/updates?advanced-search=(PC255.PC175.PC216.PC8657)_(S1503_F10)#content" target="_blank">More >>></a>
                 </div>
                 <div class="col-xs-6 col-md-4 news">
                     <h3>NEWS/UPDATES</h3>
                     <ul></ul>
-                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4593&disaster_type=4672&source=1503#content" target="_blank">More >>></a>
+                    <a class="more-link" href="http://www.unocha.org/top-stories/all-stories/results?page=1" target="_blank">More >>></a>
                 </div>
                 <div class="col-xs-6 col-md-4 mediaco">
                     <h3>MEDIA</h3>
@@ -104,40 +106,79 @@
             <div class="row">
                 <div id="myCarousel" class="col-xs-6 col-md-4 maps carousel slide"  data-ride="carousel">
                     <h3>MAPS &amp; INFOGRAPHICS</h3>
-                    <ul class="carousel-inner" role="listbox">
-                    
-                  
-                    </ul>
-            <div class="carousel-controls">
-                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="more-link" href="http://reliefweb.int/maps?search=famine#content" target="_blank">More</a>
-                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+                    <ul class="carousel-inner" role="listbox"></ul>
+                    <div class="carousel-controls">
+                        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="more-link" href="http://reliefweb.int/maps?search=famine#content" target="_blank">More</a>
+                        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
 
                 </div>
-                <div class="col-xs-6 col-md-4">
+                <div id="myCarousel2" class="col-xs-6 col-md-4 carousel slide"  data-ride="carousel">
                     <h3>MULTI-MEDIA</h3>
-                    <ul>
-                        <li>
-                            <iframe width="100%"  src="https://www.youtube.com/embed/XztR6g-LRRE" frameborder="0" allowfullscreen></iframe><strong>Nigeria, Somalia, South Sudan and Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>21 Mar 2017</span>&nbsp;<br><a href="https://www.youtube.com/watch?v=XztR6g-LRRE">Four Famines in Nigeria, Somalia, South Sudan and Yemen Loom</a>
-                        </li>                  
+                    <ul class="carousel-inner" role="listbox">
+                        <li class="item active">
+                            <div class="img-container"><img src="https://exposure.imgix.net/production/posts/223774/cover-photo/cover-1490047845.jpg?w=500&h=500&q=58&fm=pjpg&auto=format&sharp=4&crop=&fit=crop">
+                            </div><strong>Somalia</strong>&nbsp;&nbsp;•&nbsp; <span>22 Mar 2017</span>&nbsp;<br><a target="_blank" href="https://unocha.exposure.co/ten-things-you-need-to-know-about-the-looming-famine-in-somalia">10 things you need to know about the looming famine in Somalia</a>
+                        </li>   
+                        <li class="item">
+                            <div class="img-container"><img src="https://exposure.imgix.net/production/posts/221405/cover-photo/cover-1488839627.jpg?w=500&h=500&q=58&fm=pjpg&auto=format&sharp=4&crop=&fit=crop">
+                            </div><strong>Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>13 Mar 2017</span>&nbsp;<br><a target="_blank" href="https://unocha.exposure.co/yemen-on-famine-alert">Yemen on famine alert</a>
+                        </li>
+                        <li class="item">
+                            <div class="img-container"><img src="https://exposure.imgix.net/production/posts/218935/cover-photo/cover-1487385097.jpg?w=500&h=500&q=58&fm=pjpg&auto=format&sharp=4&crop=&fit=crop">
+                            </div><strong>Nigeria</strong>&nbsp;&nbsp;•&nbsp; <span>21 Feb 2017</span>&nbsp;<br><a target="_blank" href="https://unocha.exposure.co/the-hard-path-home">The hard path home</a>
+                        </li>                       
                     </ul>
-                    <a class="more-link" href="https://www.youtube.com/results?search_query=nigeria+somalia+south+sudan+famine" target="_blank">More >>></a>
+                    <div class="carousel-controls">
+                        <a class="carousel-control-prev" href="#myCarousel2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="more-link" href="https://unocha.exposure.co/" target="_blank">More</a>
+                        <a class="carousel-control-next" href="#myCarousel2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-xs-6 col-md-4 funding">
+                <div id="myCarousel3" class="col-xs-6 col-md-4 carousel slide funding"  data-ride="carousel">
                     <h3>FUNDING DOCUMENTS</h3>
-                    <ul>
-                        <li>
-                            <img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/753074-Nigeria%2BSouth%2BSudan%2BSomalia%2BYemen%2Bfunding%2Bupdate_10%2BApril_FINAL.png?itok=3-bXcSOA"><strong>Nigeria, Somalia, South Sudan and Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>10 Apr 2017</span>&nbsp;<br><a href="https://www.youtube.com/watch?v=XztR6g-LRRE">Funding Update: Nigeria, South Sudan, Somalia, and Yemen (10 April 2017)</a>
-                        </li>                      
+                    <ul class="carousel-inner" role="listbox">
+                        <li class="item active">
+                            <div class="img-container"><img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/748334-YEMEN_2017%2BHRP_Final.png?itok=qTTiYMy3"></div>
+                            <strong>Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>8 Feb 2017</span>&nbsp;<br><a target="_blank"  href="http://reliefweb.int/report/yemen/yemen-humanitarian-response-plan-january-december-2017-enar">Yemen: Humanitarian Response Plan January-December 2017 [EN/AR]</a>
+                        </li>
+                        <li class="item">
+                            <div class="img-container"><img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/686689-ocha_nga_hrp_2017_summary_16122016.png?itok=NK0MAlhw"></div>
+                            <strong>Nigeria</strong>&nbsp;&nbsp;•&nbsp; <span>5 Dec 2016</span>&nbsp;<br><a target="_blank"  href="http://reliefweb.int/report/nigeria/nigeria-2017-humanitarian-response-plan-january-december-2017">Yemen: Humanitarian Response Plan January-December 2017 [EN/AR]</a>                      
+                        </li>
+                        <li class="item">
+                            <div class="img-container"><img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/716524-South_Sudan_2017_Humanitarian_Response_Plan.png?itok=EkZhaH4Z"></div>
+                            <strong>South Sudan</strong>&nbsp;&nbsp;•&nbsp; <span>13 Feb 2017</span>&nbsp;<br><a target="_blank"  href="http://reliefweb.int/report/south-sudan/south-sudan-2017-humanitarian-response-plan-january-december-2017">South Sudan 2017 Humanitarian Response Plan (January - December 2017)</a>                      
+                        </li>
+                        <li class="item">
+                            <div class="img-container"><img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/706934-2017%2BSomalia%2BHumanitarian%2BResponse%2BPlan_FINAL.png?itok=hZ2XbCc3"></div>
+                            <strong>Somalia</strong>&nbsp;&nbsp;•&nbsp; <span>30 Nov 2016</span>&nbsp;<br><a target="_blank"  href="http://reliefweb.int/report/somalia/somalia-humanitarian-response-plan-january-december-2017">Somalia Humanitarian Response Plan January-December 2017</a>                      
+                        </li>
                     </ul>
-                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4597#content" target="_blank">More >>></a>
+                    <div class="carousel-controls">
+                        <a class="carousel-control-prev" href="#myCarousel3" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="more-link" href="http://reliefweb.int/updates?advanced-search=(PC255.PC175.PC216.PC8657)_(F4_S1503)#content" target="_blank">More</a>
+                        <a class="carousel-control-next" href="#myCarousel3" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
             </div> 
           </section>
