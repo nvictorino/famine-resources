@@ -72,8 +72,11 @@
             #resources .row div .more-link {color:#E74E37}
             #resources .row div img {width:123px; display:block; margin: 0 auto 20px}
             #resources .row div iframe {margin: 15px 0 20px}
-            .carousel-control-prev span, .carousel-control-next span {color: #E74E37;}
-            .carousel-controls {text-align: center}
+            .carousel-controls {text-align: center; width:81px; margin: 0 auto;}
+            .carousel-control-prev, .carousel-control-next {height:22px; width:16px; background-color: #E74E37; border-radius: 3px; display:block }
+            .carousel-control-prev {float:left}
+            .carousel-control-next {float:right}
+            .carousel-control-prev span, .carousel-control-next span {color: #ffffff; top:3px;}
         </style>   
     </head>
 
@@ -107,12 +110,12 @@
                     </ul>
             <div class="carousel-controls">
                 <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="more-link" href="http://reliefweb.int/maps?search=famine#content" target="_blank">More</a>
                 <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
