@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html>
+    <head>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+  
+        <script type="text/javascript">
+            var urlHR ='https://api.reliefweb.int/v1/reports?appname=apidoc&limit=3&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=format&filter[conditions][1][value][]=situation-report&filter[conditions][2][field]=theme&filter[conditions][2][value][]=food-and-nutrition&filter[conditions][3][field]=disaster&filter[conditions][3][value][]=drought&preset=latest&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format'
+            var urlNews = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=3&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=source&filter[conditions][1][value][]=OCHA&filter[conditions][2][field]=theme&filter[conditions][2][value][]=food-and-nutrition&filter[conditions][3][field]=disaster&filter[conditions][3][value][]=drought&preset=latest&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format'
+            var urlMediaco = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=3&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=format&filter[conditions][1][value][]=news-and-press-release&filter[conditions][2][field]=theme&filter[conditions][2][value][]=food-and-nutrition&filter[conditions][3][field]=disaster&filter[conditions][3][value][]=drought&preset=latest&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format'
+            var urlMaps = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=8&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][operator]=OR&filter[conditions][1][field]=format&filter[conditions][1][value][]=Map&filter[conditions][1][value][]=Infographic&filter[conditions][1][value][]=Interactive&filter[conditions][2][field]=theme&filter[conditions][2][value][]=food-and-nutrition&filter[conditions][3][field]=disaster&filter[conditions][3][value][]=drought&preset=latest&fields[include][]=file.preview&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format'
+            var urlFunding = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=1&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][2][operator]=OR&filter[conditions][2][field]=theme&filter[conditions][2][value][]=humanitarian-financing&filter[conditions][2][value][]=food-and-nutrition&preset=latest&filter[conditions][1][field]=format&filter[conditions][1][value]=appeal&fields[include][]=file.preview&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format'            
+
+            d3.json(urlHR, function(error, input) {
+                var stringUrl = JSON.stringify(input.data);
+                var obj = JSON.parse(stringUrl);
+                var arrayLength = obj.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    $("div.humrep ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                }     
+            });
+            d3.json(urlNews, function(error, input) {
+                var stringUrl = JSON.stringify(input.data);
+                var obj = JSON.parse(stringUrl);
+                var arrayLength = obj.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    $("div.news ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                }     
+            });          
+            d3.json(urlMediaco, function(error, input) {
+                var stringUrl = JSON.stringify(input.data);
+                var obj = JSON.parse(stringUrl);
+                var arrayLength = obj.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    $("div.mediaco ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                }     
+            });
+            d3.json(urlMaps, function(error, input) {
+                var stringUrl = JSON.stringify(input.data);
+                var obj = JSON.parse(stringUrl);
+                var arrayLength = obj.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if(i==0){var x='active'} else {var x=''};
+                    $("div.maps ul").prepend("<li class='item "+x+"'><img src='"+obj[i].fields.file[0].preview.url+"'><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                }     
+            });
+          
+        $(function(){
+          // You used .myCarousel here. 
+          // That's the class selector not the id selector,
+          // which is #myCarousel
+          $('#myCarousel').carousel('pause');
+        });
+        </script>
+
+        <style>
+            body {font-family: 'Roboto', sans-serif;}
+            h2 {font-family: 'Roboto Condensed'; font-weight: bold; text-align: center; margin: 0 0 50px 0}
+            .row {margin:0 0 50px 0}
+            section#resources h3 {font-size:14pt; border-top: 1px solid grey; border-bottom: 1px solid grey; padding:4px 0; font-family: 'Roboto Condensed'; margin: 0 0 15px 0;}
+            #resources .row div ul {list-style-type: none; margin: 0; padding: 0}
+            #resources .row div ul {list-style-type: none; margin: 0; padding: 0}
+            #resources .row div ul li {margin: 0 0 10px 0;}
+            #resources .row div ul li strong {font-size: 14pt; font-weight: bold}
+            #resources .row div ul li span {font-size: 14pt; color:#808080}
+            #resources .row div .more-link {color:#E74E37}
+            #resources .row div img {width:123px; display:block; margin: 0 auto 20px}
+            #resources .row div iframe {margin: 15px 0 20px}
+            .carousel-control-prev span, .carousel-control-next span {color: #E74E37;}
+            .carousel-controls {text-align: center}
+        </style>   
+    </head>
+
+    <body>
+      <div class="container">
+          <section id="resources">
+            <h2>RESOURCES</h2>
+            <div class="row">
+                <div class="col-xs-6 col-md-4 humrep">
+                    <h3>HUMANITARIAN REPORTS</h3>
+                    <ul></ul>
+                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4593&disaster_type=4672#content" target="_blank">More >>></a>
+                </div>
+                <div class="col-xs-6 col-md-4 news">
+                    <h3>NEWS/UPDATES</h3>
+                    <ul></ul>
+                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4593&disaster_type=4672&source=1503#content" target="_blank">More >>></a>
+                </div>
+                <div class="col-xs-6 col-md-4 mediaco">
+                    <h3>MEDIA</h3>
+                    <ul></ul>
+                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4593&disaster_type=4672&format=8#content" target="_blank">More >>></a>
+                </div>
+            </div>
+            <div class="row">
+                <div id="myCarousel" class="col-xs-6 col-md-4 maps carousel slide"  data-ride="carousel">
+                    <h3>MAPS &amp; INFOGRAPHICS</h3>
+                    <ul class="carousel-inner" role="listbox">
+                    
+                  
+                    </ul>
+            <div class="carousel-controls">
+                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="more-link" href="http://reliefweb.int/maps?search=famine#content" target="_blank">More</a>
+                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <h3>MULTI-MEDIA</h3>
+                    <ul>
+                        <li>
+                            <iframe width="100%"  src="https://www.youtube.com/embed/XztR6g-LRRE" frameborder="0" allowfullscreen></iframe><strong>Nigeria, Somalia, South Sudan and Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>21 Mar 2017</span>&nbsp;<br><a href="https://www.youtube.com/watch?v=XztR6g-LRRE">Four Famines in Nigeria, Somalia, South Sudan and Yemen Loom</a>
+                        </li>                  
+                    </ul>
+                    <a class="more-link" href="https://www.youtube.com/results?search_query=nigeria+somalia+south+sudan+famine" target="_blank">More >>></a>
+                </div>
+                <div class="col-xs-6 col-md-4 funding">
+                    <h3>FUNDING DOCUMENTS</h3>
+                    <ul>
+                        <li>
+                            <img src="http://img.static.reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/753074-Nigeria%2BSouth%2BSudan%2BSomalia%2BYemen%2Bfunding%2Bupdate_10%2BApril_FINAL.png?itok=3-bXcSOA"><strong>Nigeria, Somalia, South Sudan and Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>10 Apr 2017</span>&nbsp;<br><a href="https://www.youtube.com/watch?v=XztR6g-LRRE">Funding Update: Nigeria, South Sudan, Somalia, and Yemen (10 April 2017)</a>
+                        </li>                      
+                    </ul>
+                    <a class="more-link" href="http://reliefweb.int/updates?country=255.8657.216.175&theme=4597#content" target="_blank">More >>></a>
+                </div>
+            </div> 
+          </section>
+      </div>
+    </body>
+</html>
+
+
