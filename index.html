@@ -14,7 +14,7 @@
             var urlHR ='https://api.reliefweb.int/v1/reports?appname=apidoc&limit=3&preset=latest&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=format&filter[conditions][1][value][]=situation-report&filter[conditions][2][field]=source&filter[conditions][2][value][]=ocha&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format';
             var urlNews = 'https://www.sandbox.unochaorg.568elmp03.blackmesh.com/ocha_news/stories';
             var urlMediaco = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=3&preset=latest&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=format&filter[conditions][1][value][]=news-and-press-release&filter[conditions][2][field]=theme&filter[conditions][2][value][]=food-and-nutrition&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format';
-            var urlMaps = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=8&preset=latest&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=theme&filter[conditions][1][value][]=food-and-nutrition&filter[conditions][2][operator]=OR&filter[conditions][2][field]=format&filter[conditions][2][value][]=Map&filter[conditions][2][value][]=Infographic&filter[conditions][2][value][]=Interactive&filter[conditions][3][field]=language&filter[conditions][3][value][]=english&fields[include][]=file.preview&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format';       
+            var urlMaps = 'https://api.reliefweb.int/v1/reports?appname=apidoc&limit=5&preset=latest&filter[operator]=AND&filter[conditions][0][operator]=OR&filter[conditions][0][field]=primary_country&filter[conditions][0][value][]=SSD&filter[conditions][0][value][]=YEM&filter[conditions][0][value][]=SOM&filter[conditions][0][value][]=NGA&filter[conditions][1][field]=theme&filter[conditions][1][value][]=food-and-nutrition&filter[conditions][2][operator]=OR&filter[conditions][2][field]=format&filter[conditions][2][value][]=Map&filter[conditions][2][value][]=Infographic&filter[conditions][2][value][]=Interactive&filter[conditions][3][field]=language&filter[conditions][3][value][]=english&fields[include][]=file.preview&fields[include][]=primary_country.name&fields[include][]=date.created&fields[include][]=headline.title&fields[include][]=url_alias&fields[include][]=format';       
 
             d3.json(urlHR, function(error, input) {
                 var stringUrl = JSON.stringify(input.data);
@@ -25,10 +25,10 @@
                 }     
             });
             d3.json(urlNews, function(error, input) {
-                var stringUrl = input;
-                var arrayLength = stringUrl.length;
+                var arrayLength = input.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    $("div.mediaco ul").append("<li><strong>"+obj[i].field_top_stories_country[0]+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].changed).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='http://www.unocha.org"+obj[i].path+"'>"+obj[i].title+"</a></li>");
+                    $("div.news ul").append("<li><strong>"+input[i].field_top_stories_country[0]+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(input[i].changed).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='http://www.unocha.org"+input[i].path+"'>"+input[i].title+"</a></li>");
+
                 }  
             });          
             d3.json(urlMediaco, function(error, input) {
@@ -58,13 +58,14 @@
             body {font-family: 'Roboto', sans-serif;}
             h2 {font-family: 'Roboto Condensed', sans-serif; font-weight: bold; text-align: center; margin: 0 0 50px 0}
             .row {margin:0 0 50px 0}
+            section#resources {font-size:12pt}
             section#resources h3 {font-size:14pt; border-top: 1px solid grey; border-bottom: 1px solid grey; padding:4px 0; font-family: 'Roboto Condensed', sans-serif; margin: 0 0 15px 0;}
             #resources .row div ul {list-style-type: none; margin: 0; padding: 0}
             #resources .row div ul {list-style-type: none; margin: 0; padding: 0}
             #resources .row div ul li {margin: 0 0 10px 0;}
             #resources .row div ul li strong {font-size: 14pt; font-weight: bold}
             #resources .row div ul li span {font-size: 14pt; color:#808080}
-            #resources .row div .more-link {color:#E74E37; position:relative; top:3px; font-size:14px}
+            #resources .row div .more-link {color:#E74E37; position:relative; }
             #resources .row div img {height: 90%; display:block; margin: 0 auto 20px}
             #resources .row div iframe {margin: 15px 0 20px}
             .carousel-inner {height: 300px}
@@ -119,7 +120,7 @@
                     <h3>MULTI-MEDIA</h3>
                     <ul class="carousel-inner" role="listbox">
                         <li class="item active">
-                            <div class="img-container"><img src="yemen-int-hrp.png" width="80%">
+                            <div class="img-container"><img src="http://ochayemen.org/hrp-2017/sites/all/themes/hrp/images/bg.png" width="80%">
                             </div><strong>Yemen</strong>&nbsp;&nbsp;•&nbsp; <span>Jan -Dec 2017</span>&nbsp;<br><a target="_blank" href="http://ochayemen.org/hrp-2017/">Yemen Interactive Humanitarian Response Plan 2017</a>
                         </li> 
                         <li class="item">
