@@ -21,13 +21,14 @@
                 var obj = JSON.parse(stringUrl);
                 var arrayLength = obj.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    $("div.humrep ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                    $("div.humrep ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a  target='_blank' href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
                 }     
             });
-            d3.json(urlNews, function(error, input) {
+            $.getJSON(urlNews, function(input) {
+                console.log(input);
                 var arrayLength = input.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    $("div.news ul").append("<li><strong>"+input[i].field_top_stories_country[0]+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(input[i].changed).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='http://www.unocha.org"+input[i].path+"'>"+input[i].title+"</a></li>");
+                    $("div.news ul").append("<li><strong>"+input[i].field_top_stories_country[0]+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(input[i].changed).format('DD MMM YYYY')+"</span>&nbsp;<br /><a target='_blank' href='"+input[i].path+"'>"+input[i].title+"</a></li>");
 
                 }  
             });          
@@ -36,7 +37,7 @@
                 var obj = JSON.parse(stringUrl);
                 var arrayLength = obj.length;
                 for (var i = 0; i < arrayLength; i++) {
-                    $("div.mediaco ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                    $("div.mediaco ul").append("<li><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a target='_blank' href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
                 }     
             });
             d3.json(urlMaps, function(error, input) {
@@ -45,7 +46,7 @@
                 var arrayLength = obj.length;
                 for (var i = 0; i < arrayLength; i++) {
                     if(i==0){var x='active'} else {var x=''};
-                    $("div.maps ul").prepend("<li class='item "+x+"'><div class='img-container'><img src='"+obj[i].fields.file[0].preview.url+"'></div><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
+                    $("div.maps ul").prepend("<li class='item "+x+"'><div class='img-container'><img src='"+obj[i].fields.file[0].preview.url+"'></div><strong>"+obj[i].fields.primary_country.name+"</strong>&nbsp;&nbsp;&#8226;&nbsp; <span>"+moment(obj[i].fields.date.created).format('DD MMM YYYY')+"</span>&nbsp;<br /><a target='_blank' href='"+obj[i].fields.url_alias+"'>"+obj[i].fields.title+"</a></li>");
                 }     
             });
           
